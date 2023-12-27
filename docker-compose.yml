@@ -1,0 +1,115 @@
+version: '3'
+services:
+
+  config-service:
+    image: clinique/configuration
+    container_name: config-service
+    ports:
+      - '9100:9100'
+    expose:
+      - '9100'
+    # environment:
+    #   - EUREKA_SERVICE_URL=http://eureka-service:9092/eureka
+    healthcheck:
+      test: ["CMD-SHELL", " netstat -an | grep -q 9100"]
+      interval: 10s
+      retries: 4
+    # depends_on:
+    #   eureka-service:
+    #     condition: service_healthy
+
+  eureka-service:
+    image: clinique/eureka
+    container_name: eureka-service
+    ports:
+      - '9092:9092'
+    expose:
+      - '9092'
+    depends_on:
+      config-service:
+        condition: service_healthy
+    # healthcheck:
+    #   test: [ "CMD", "curl", "-f", "http://localhost:9092/actuator/health" ]
+    #   interval: 10s
+    #   retries: 4
+
+  consultation-service:
+    image: clinique/consultation
+    container_name: consultation-service
+    ports:
+      - '9094:9094'
+    expose:
+      - '9094'
+    # environment:
+    #   - CONFIG_SERVICE_URL=http://config-service:9100
+    healthcheck:
+      test: ["CMD-SHELL", " netstat -an | grep -q 9094"]
+      interval: 10s
+      retries: 4
+    # depends_on:
+    #   config-service:
+    #     condition: service_healthy
+    depends_on:
+     enregistrement-service:
+        condition: service_healthy
+    links:
+      - eureka-service
+    # entrypoint: ["./dockerize","-wait=tcp://eureka-service:9092","-timeout=60s","--","java", "org.springframework.boot.loader.JarLauncher"]
+
+  enregistrement-service:
+    image: clinique/enregistrement
+    container_name: enregistrement-service
+    ports:
+      - '9093:9093'
+    expose:
+      - '9093'
+    # environment:
+    #   - CONFIG_SERVICE_URL=http://config-service:9100
+    healthcheck:
+      test: ["CMD-SHELL", " netstat -an | grep -q 9093"]
+      interval: 10s
+      retries: 4
+    # depends_on:
+    #   config-service:
+    #     condition: service_healthy
+    depends_on:
+     config-service:
+        condition: service_healthy
+    links:
+      - eureka-service
+    # entrypoint: ["./dockerize","-wait=tcp://eureka-service:9092","-timeout=60s","--","java", "org.springframework.boot.loader.JarLauncher"]
+
+  diagnostic-service:
+    image: clinique/diagnostic
+    container_name: diagnostic-service
+    ports:
+      - '9095:9095'
+    expose:
+      - '9095'
+    environment:
+    - SPRING_PROFILES_ACTIVE=docker
+    healthcheck:
+      test: ["CMD-SHELL", " netstat -an | grep -q 9095"]
+      interval: 10s
+      retries: 4
+    depends_on:
+     consultation-service:
+        condition: service_healthy
+    links:
+     - eureka-service
+    
+
+  paiement-service:
+    image: clinique/paiement
+    container_name: paiement-service
+    ports:
+      - '9096:9096'
+    expose:
+      - '9096'
+    environment:
+    - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      diagnostic-service:
+        condition: service_healthy
+    links:
+     - eureka-service

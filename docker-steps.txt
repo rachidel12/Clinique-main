@@ -1,0 +1,10 @@
+Dockernize config server:
+
+1- Run this command inside each service: mvn clean compile package -DskipTests
+2- create a dockerfile in each microservice and do these commands: FROM openjdk:17-jdk-alpine
+                                                                    WORKDIR /opt
+                                                                    ENV PORT 9094
+                                                                    COPY target/*.jar /opt/app.jar
+                                                                    ENTRYPOINT exec java $JAVA_OPTS -jar app.jar
+3- then do this command in a terminal pointed in each microservice: docker buildx build -t clinique/configuration .
+4- then this command: docker run -d -p 9094:9094 --name consulation_service clinique/consulation   

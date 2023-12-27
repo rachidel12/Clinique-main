@@ -1,0 +1,76 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "ConfigurationApplication",
+      "request": "launch",
+      "mainClass": "com.serviceconfig.configuration.ConfigurationApplication",
+      "projectName": ""
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-CliniqueEurekaServerApplication<cliniqueEurekaServer>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.cliniqueEurekaServer.CliniqueEurekaServerApplication",
+      "projectName": "cliniqueEurekaServer",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env",
+      "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=52938 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=cliniqueEurekaServer"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-ConsultationApplication<consultation>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.serviceConsultation.consultation.ConsultationApplication",
+      "projectName": "consultation",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env",
+      "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=52939 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=consultation"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-DiagnosticApplication<diagnostic>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.serviceDiagnostic.diagnostic.DiagnosticApplication",
+      "projectName": "diagnostic",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env",
+      "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=52940 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=diagnostic"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-EnregistrementApplication<enregistrement>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.serviceEnregistrement.enregistrement.EnregistrementApplication",
+      "projectName": "enregistrement",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env",
+      "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=52941 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=enregistrement"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-PaiementApplication<paiement>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.servicePaiement.paiement.PaiementApplication",
+      "projectName": "paiement",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env",
+      "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=52942 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=paiement"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-ConfigurationApplication<configuration>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.serviceconfig.configuration.ConfigurationApplication",
+      "projectName": "configuration",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
